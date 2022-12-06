@@ -88,22 +88,25 @@ export const useUserStore = defineStore({
         mode?: ErrorMessageMode;
       },
     ): Promise<GetUserInfoModel | null> {
+      console.log(123);
       try {
-        const { goHome = true, mode, ...loginParams } = params;
-        const data = await loginApi(loginParams, mode);
-        const { token } = data;
-
+        const { goHome = true, ...loginParams } = params;
+        const data = await loginApi(loginParams);
+        const { userid } = (data as any).data.data;
         // save token
-        this.setToken(token);
-        return this.afterLoginAction(goHome);
+        this.setToken(userid);
+        console.log(this.getToken);
+        return this.afterLoginAction(userid, (data as any).data.data, goHome);
       } catch (error) {
         return Promise.reject(error);
       }
     },
-    async afterLoginAction(goHome?: boolean): Promise<GetUserInfoModel | null> {
+    async afterLoginAction(id, params?, goHome?: boolean): Promise<GetUserInfoModel | null> {
+      console.log(123);
+
       if (!this.getToken) return null;
       // get user info
-      const userInfo = await this.getUserInfoAction();
+      const userInfo = await this.getUserInfoAction(id, params ? params : null);
 
       const sessionTimeout = this.sessionTimeout;
       if (sessionTimeout) {
@@ -120,12 +123,30 @@ export const useUserStore = defineStore({
         }
         goHome && (await router.replace(userInfo?.homePath || PageEnum.BASE_HOME));
       }
+      if (params) return params;
       return userInfo;
     },
-    async getUserInfoAction(): Promise<UserInfo | null> {
+    async getUserInfoAction(id, params?): Promise<UserInfo | null> {
+      console.log(123);
+      if (params) {
+        params.roles = ['all'];
+        this.setUserInfo(params);
+        return params;
+      }
       if (!this.getToken) return null;
-      const userInfo = await getUserInfo();
+      const reqid = id ? id : this.getToken;
+      console.log(this.getUserInfo);
+      let userInfo;
+      if (this.getUserInfo) {
+        userInfo = this.getUserInfo;
+        userInfo.realname = this.getUserInfo.username;
+      } else {
+        userInfo = await getUserInfo(reqid);
+        userInfo.realname = userInfo.username;
+      }
       const { roles = [] } = userInfo;
+      console.log(userInfo);
+      userInfo.roles = ['all'];
       if (isArray(roles)) {
         const roleList = roles.map((item) => item.value) as RoleEnum[];
         this.setRoleList(roleList);
@@ -133,6 +154,7 @@ export const useUserStore = defineStore({
         userInfo.roles = [];
         this.setRoleList([]);
       }
+      console.log(userInfo.roles);
       this.setUserInfo(userInfo);
       return userInfo;
     },

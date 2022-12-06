@@ -43,7 +43,7 @@ export function useFormRules(formData?: Recordable) {
 
   const getAccountFormRule = computed(() => createRule(t('sys.login.accountPlaceholder')));
   const getPasswordFormRule = computed(() => createRule(t('sys.login.passwordPlaceholder')));
-  const getSmsFormRule = computed(() => createRule(t('sys.login.smsPlaceholder')));
+  // const getSmsFormRule = computed(() => createRule(t('sys.login.smsPlaceholder')));
   const getMobileFormRule = computed(() => createRule(t('sys.login.mobilePlaceholder')));
 
   const validatePolicy = async (_: RuleObject, value: boolean) => {
@@ -65,21 +65,21 @@ export function useFormRules(formData?: Recordable) {
   const getFormRules = computed((): { [k: string]: ValidationRule | ValidationRule[] } => {
     const accountFormRule = unref(getAccountFormRule);
     const passwordFormRule = unref(getPasswordFormRule);
-    const smsFormRule = unref(getSmsFormRule);
+    // const smsFormRule = unref(getSmsFormRule);
     const mobileFormRule = unref(getMobileFormRule);
 
     const mobileRule = {
-      sms: smsFormRule,
-      mobile: mobileFormRule,
+      // sms: smsFormRule,
+      usermail: mobileFormRule,
     };
     switch (unref(currentState)) {
       // register form rules
       case LoginStateEnum.REGISTER:
         return {
-          account: accountFormRule,
-          password: passwordFormRule,
+          username: accountFormRule,
+          userpwd: passwordFormRule,
           confirmPassword: [
-            { validator: validateConfirmPassword(formData?.password), trigger: 'change' },
+            { validator: validateConfirmPassword(formData?.userpwd), trigger: 'change' },
           ],
           policy: [{ validator: validatePolicy, trigger: 'change' }],
           ...mobileRule,
@@ -88,7 +88,7 @@ export function useFormRules(formData?: Recordable) {
       // reset password form rules
       case LoginStateEnum.RESET_PASSWORD:
         return {
-          account: accountFormRule,
+          usermail: accountFormRule,
           ...mobileRule,
         };
 
@@ -99,8 +99,8 @@ export function useFormRules(formData?: Recordable) {
       // login form rules
       default:
         return {
-          account: accountFormRule,
-          password: passwordFormRule,
+          usermail: accountFormRule,
+          userpwd: passwordFormRule,
         };
     }
   });

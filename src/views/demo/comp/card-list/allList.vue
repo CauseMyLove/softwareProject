@@ -1,22 +1,23 @@
 <template>
   <div>
     <PageWrapper title="商品列表">
-      <!-- <template #rightFooter>
-      <a-input :value="searchItem" />
-    </template> -->
+      <template #extra>
+        <InputSearch
+          v-model:value="searcheItem"
+          placeholder="input search query here"
+          :loading="loading"
+          enter-button
+          @search="onSearch"
+        />
+      </template>
       <CardList
         :params="params"
-        :api="GOODS_LIST_page"
+        :api="GET_ALL_LIST"
         @get-method="getMethod"
         @opendrawer="handleDrawer"
         @open-detail="handleDetail"
         @delete="handleDel"
-      >
-        <template #header>
-          <!-- <Button type="primary" color="error"> 按钮1 </Button> -->
-          <Button type="primary" color="success" @click="addGoods"> 添加 </Button>
-        </template>
-      </CardList>
+      />
     </PageWrapper>
     <addModal @register="register" />
     <drawer @register="register2" />
@@ -27,7 +28,8 @@
   import { CardList } from '/@/components/CardList';
   import { Button } from '/@/components/Button';
   import { PageWrapper } from '/@/components/Page';
-  import { demoListApi, GOODS_LIST_page } from '/@/api/demo/table';
+  import { InputSearch } from 'ant-design-vue';
+  import { demoListApi, GET_ALL_LIST } from '/@/api/demo/table';
   import { useMessage } from '/@/hooks/web/useMessage';
   import { useUserStore } from '/@/store/modules/user';
   import drawer from './drawer.vue';
@@ -35,11 +37,13 @@
   import addModal from './addmodal.vue';
   import { useModal } from '/@/components/Modal';
   import { useDrawer } from '/@/components/Drawer';
+  import { ref } from 'vue';
   const [register, { openModal }] = useModal();
   const { notification } = useMessage();
+  const searcheItem = ref('');
   // 请求api时附带参数
-
-  const params = { userid: useUserStore().getUserInfo.userid };
+  let params = ref({ text: searcheItem.value });
+  const loading = ref(false);
   const [register1, { openDrawer: openDetail }] = useDrawer();
   const [register2, { openDrawer: openDrawer2 }] = useDrawer();
   let reload = () => {};
@@ -53,9 +57,15 @@
     reload();
   }
 
-  async function addGoods(params: type) {
-    const { userid } = useUserStore().getUserInfo;
-    openModal(true, { userid });
+  function onSearch() {
+    try {
+      loading.value = true;
+      params.value = { text: searcheItem.value };
+      reload();
+    } catch {
+    } finally {
+      loading.value = false;
+    }
   }
   async function handleDrawer(e) {
     console.log(e);

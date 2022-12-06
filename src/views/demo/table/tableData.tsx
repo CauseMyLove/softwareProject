@@ -10,7 +10,7 @@ export function getBasicColumns(): BasicColumn[] {
       width: 200,
     },
     {
-      title: '姓名',
+      title: '回复对象',
       dataIndex: 'name',
       width: 150,
       filters: [
@@ -19,7 +19,7 @@ export function getBasicColumns(): BasicColumn[] {
       ],
     },
     {
-      title: '地址',
+      title: '回复内容',
       dataIndex: 'address',
     },
     {
@@ -30,17 +30,17 @@ export function getBasicColumns(): BasicColumn[] {
       defaultHidden: true,
     },
     {
-      title: '开始时间',
+      title: '回复时间',
       width: 150,
       sorter: true,
       dataIndex: 'beginTime',
     },
-    {
-      title: '结束时间',
-      width: 150,
-      sorter: true,
-      dataIndex: 'endTime',
-    },
+    // {
+    //   title: '结束时间',
+    //   width: 150,
+    //   sorter: true,
+    //   dataIndex: 'endTime',
+    // },
   ];
 }
 
@@ -54,12 +54,12 @@ export function getBasicShortColumns(): BasicColumn[] {
       sortOrder: 'ascend',
     },
     {
-      title: '姓名',
+      title: '回复对象',
       dataIndex: 'name',
       width: 120,
     },
     {
-      title: '地址',
+      title: '回复内容',
       dataIndex: 'address',
     },
     {

@@ -1,7 +1,7 @@
 <template>
   <div class="p-4">
     <BasicTable
-      title="基础示例"
+      title="所有订单"
       titleHelpMessage="温馨提醒"
       :columns="columns"
       :dataSource="data"
@@ -13,7 +13,7 @@
       :pagination="pagination"
       @columns-change="handleColumnChange"
     >
-      <template #toolbar>
+      <!-- <template #toolbar>
         <a-button type="primary" @click="toggleCanResize">
           {{ !canResize ? '自适应高度' : '取消自适应' }}
         </a-button>
@@ -24,7 +24,7 @@
         <a-button type="primary" @click="toggleStriped">
           {{ !striped ? '显示斑马纹' : '隐藏斑马纹' }}
         </a-button>
-      </template>
+      </template> -->
     </BasicTable>
   </div>
 </template>

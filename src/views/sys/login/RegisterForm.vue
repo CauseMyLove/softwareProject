@@ -2,34 +2,34 @@
   <template v-if="getShow">
     <LoginFormTitle class="enter-x" />
     <Form class="p-4 enter-x" :model="formData" :rules="getFormRules" ref="formRef">
-      <FormItem name="account" class="enter-x">
+      <FormItem name="username" class="enter-x">
         <Input
           class="fix-auto-fill"
           size="large"
-          v-model:value="formData.account"
+          v-model:value="formData.username"
           :placeholder="t('sys.login.userName')"
         />
       </FormItem>
-      <FormItem name="mobile" class="enter-x">
+      <FormItem name="usermail" class="enter-x">
         <Input
           size="large"
-          v-model:value="formData.mobile"
+          v-model:value="formData.usermail"
           :placeholder="t('sys.login.mobile')"
           class="fix-auto-fill"
         />
       </FormItem>
-      <FormItem name="sms" class="enter-x">
+      <!-- <FormItem name="sms" class="enter-x">
         <CountdownInput
           size="large"
           class="fix-auto-fill"
           v-model:value="formData.sms"
           :placeholder="t('sys.login.smsCode')"
         />
-      </FormItem>
-      <FormItem name="password" class="enter-x">
+      </FormItem> -->
+      <FormItem name="userpwd" class="enter-x">
         <StrengthMeter
           size="large"
-          v-model:value="formData.password"
+          v-model:value="formData.userpwd"
           :placeholder="t('sys.login.password')"
         />
       </FormItem>
@@ -70,10 +70,11 @@
   import LoginFormTitle from './LoginFormTitle.vue';
   import { Form, Input, Button, Checkbox } from 'ant-design-vue';
   import { StrengthMeter } from '/@/components/StrengthMeter';
-  import { CountdownInput } from '/@/components/CountDown';
+  // import { CountdownInput } from '/@/components/CountDown';
   import { useI18n } from '/@/hooks/web/useI18n';
   import { useLoginState, useFormRules, useFormValid, LoginStateEnum } from './useLogin';
-
+  import { registerUser } from '/@/api/sys/user';
+  import { useMessage } from '/@/hooks/web/useMessage';
   const FormItem = Form.Item;
   const InputPassword = Input.Password;
   const { t } = useI18n();
@@ -83,22 +84,36 @@
   const loading = ref(false);
 
   const formData = reactive({
-    account: '',
-    password: '',
+    username: '',
+    userpwd: '',
     confirmPassword: '',
-    mobile: '',
-    sms: '',
+    usermail: '',
+    // sms: '',
     policy: false,
   });
 
   const { getFormRules } = useFormRules(formData);
   const { validForm } = useFormValid(formRef);
-
+  const { notification, createErrorModal } = useMessage();
   const getShow = computed(() => unref(getLoginState) === LoginStateEnum.REGISTER);
 
   async function handleRegister() {
     const data = await validForm();
     if (!data) return;
-    console.log(data);
+    loading.value = true;
+    const res = await registerUser(data);
+    if (res.data.code) {
+      notification.success({
+        message: t('注册成功'),
+        duration: 3,
+      });
+    } else if (res.data.code == 0) {
+      createErrorModal({
+        title: t('sys.api.errorTip'),
+        content: res.data.msg || t('sys.api.networkExceptionMsg'),
+        getContainer: () => document.body.querySelector(`.register`) || document.body,
+      });
+    }
+    loading.value = false;
   }
 </script>

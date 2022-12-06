@@ -8,19 +8,19 @@
     v-show="getShow"
     @keypress.enter="handleLogin"
   >
-    <FormItem name="account" class="enter-x">
+    <FormItem name="usermail" class="enter-x">
       <Input
         size="large"
-        v-model:value="formData.account"
-        :placeholder="t('sys.login.userName')"
+        v-model:value="formData.usermail"
+        :placeholder="t('sys.login.mobile')"
         class="fix-auto-fill"
       />
     </FormItem>
-    <FormItem name="password" class="enter-x">
+    <FormItem name="userpwd" class="enter-x">
       <InputPassword
         size="large"
         visibilityToggle
-        v-model:value="formData.password"
+        v-model:value="formData.userpwd"
         :placeholder="t('sys.login.password')"
       />
     </FormItem>
@@ -53,7 +53,7 @@
       </Button> -->
     </FormItem>
     <ARow class="enter-x">
-      <ACol :md="8" :xs="24">
+      <!-- <ACol :md="8" :xs="24">
         <Button block @click="setLoginState(LoginStateEnum.MOBILE)">
           {{ t('sys.login.mobileSignInFormTitle') }}
         </Button>
@@ -62,41 +62,41 @@
         <Button block @click="setLoginState(LoginStateEnum.QR_CODE)">
           {{ t('sys.login.qrSignInFormTitle') }}
         </Button>
-      </ACol>
-      <ACol :md="6" :xs="24">
+      </ACol> -->
+      <ACol :md="24" :xs="24">
         <Button block @click="setLoginState(LoginStateEnum.REGISTER)">
           {{ t('sys.login.registerButton') }}
         </Button>
       </ACol>
     </ARow>
 
-    <Divider class="enter-x">{{ t('sys.login.otherSignIn') }}</Divider>
+    <!-- <Divider class="enter-x">{{ t('sys.login.otherSignIn') }}</Divider> -->
 
-    <div class="flex justify-evenly enter-x" :class="`${prefixCls}-sign-in-way`">
+    <!-- <div class="flex justify-evenly enter-x" :class="`${prefixCls}-sign-in-way`">
       <GithubFilled />
       <WechatFilled />
       <AlipayCircleFilled />
       <GoogleCircleFilled />
       <TwitterCircleFilled />
-    </div>
+    </div> -->
   </Form>
 </template>
 <script lang="ts" setup>
   import { reactive, ref, unref, computed } from 'vue';
 
-  import { Checkbox, Form, Input, Row, Col, Button, Divider } from 'ant-design-vue';
-  import {
-    GithubFilled,
-    WechatFilled,
-    AlipayCircleFilled,
-    GoogleCircleFilled,
-    TwitterCircleFilled,
-  } from '@ant-design/icons-vue';
+  import { Checkbox, Form, Input, Row, Col, Button } from 'ant-design-vue';
+  // import {
+  //   GithubFilled,
+  //   WechatFilled,
+  //   AlipayCircleFilled,
+  //   GoogleCircleFilled,
+  //   TwitterCircleFilled,
+  // } from '@ant-design/icons-vue';
   import LoginFormTitle from './LoginFormTitle.vue';
 
   import { useI18n } from '/@/hooks/web/useI18n';
   import { useMessage } from '/@/hooks/web/useMessage';
-
+  // import { registerUser } from '/@/api/sys/user';
   import { useUserStore } from '/@/store/modules/user';
   import { LoginStateEnum, useLoginState, useFormRules, useFormValid } from './useLogin';
   import { useDesign } from '/@/hooks/web/useDesign';
@@ -119,10 +119,9 @@
   const rememberMe = ref(false);
 
   const formData = reactive({
-    account: 'vben',
-    password: '123456',
+    usermail: '1',
+    userpwd: '1',
   });
-
   const { validForm } = useFormValid(formRef);
 
   //onKeyStroke('Enter', handleLogin);
@@ -135,14 +134,14 @@
     try {
       loading.value = true;
       const userInfo = await userStore.login({
-        password: data.password,
-        username: data.account,
-        mode: 'none', //不要默认的错误提示
+        usermail: data.usermail,
+        userpwd: data.userpwd,
+        goHome: true,
       });
       if (userInfo) {
         notification.success({
           message: t('sys.login.loginSuccessTitle'),
-          description: `${t('sys.login.loginSuccessDesc')}: ${userInfo.realName}`,
+          description: `${t('sys.login.loginSuccessDesc')}: ${userInfo.username}`,
           duration: 3,
         });
       }
