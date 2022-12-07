@@ -1,6 +1,22 @@
 import { FormProps, FormSchema } from '/@/components/Table';
 import { BasicColumn } from '/@/components/Table/src/types/table';
+import { defHttp } from '/@/utils/http/axios';
 
+enum Api {
+  ORDER_LIST = '/order/page',
+}
+
+/**
+ * @description: Get sample list value
+ */
+export const ORDER_LIST = (params: any) =>
+  defHttp.post<any>(
+    {
+      url: Api.ORDER_LIST,
+      params,
+    },
+    { isReturnNativeResponse: true },
+  );
 export function getBasicColumns(): BasicColumn[] {
   return [
     {
@@ -41,6 +57,37 @@ export function getBasicColumns(): BasicColumn[] {
     //   sorter: true,
     //   dataIndex: 'endTime',
     // },
+  ];
+}
+
+export function getOrderColumns(): BasicColumn[] {
+  return [
+    {
+      title: 'ID',
+      width: 150,
+      dataIndex: 'id',
+      sorter: true,
+      sortOrder: 'ascend',
+    },
+    {
+      title: '订单名称',
+      dataIndex: 'name',
+      width: 120,
+    },
+    {
+      title: '订单内容',
+      dataIndex: 'address',
+    },
+    {
+      title: '价格',
+      dataIndex: 'no',
+      width: 80,
+    },
+    {
+      title: '加入时间',
+      dataIndex: 'beginTime',
+      width: 120,
+    },
   ];
 }
 

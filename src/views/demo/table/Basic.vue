@@ -29,9 +29,9 @@
   </div>
 </template>
 <script lang="ts">
-  import { defineComponent, ref } from 'vue';
+  import { defineComponent, onMounted, ref } from 'vue';
   import { BasicTable, ColumnChangeParam } from '/@/components/Table';
-  import { getBasicColumns, getBasicData } from './tableData';
+  import { getOrderColumns, getBasicData, ORDER_LIST } from './tableData';
 
   export default defineComponent({
     components: { BasicTable },
@@ -41,6 +41,7 @@
       const striped = ref(true);
       const border = ref(true);
       const pagination = ref<any>(false);
+      const data = ref([]);
       function toggleCanResize() {
         canResize.value = !canResize.value;
       }
@@ -61,8 +62,17 @@
       function handleColumnChange(data: ColumnChangeParam[]) {
         console.log('ColumnChanged', data);
       }
+      onMounted(async () => {
+        const res = await ORDER_LIST({
+          userId: '999',
+          page: '1',
+          size: '3',
+        });
+        data.value = res.data.data;
+        console.log(data.value);
+      });
       return {
-        columns: getBasicColumns(),
+        columns: getOrderColumns(),
         data: getBasicData(),
         canResize,
         loading,

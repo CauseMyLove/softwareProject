@@ -7,7 +7,7 @@ const comp: AppRouteModule = {
   path: '/comp',
   name: 'Comp',
   component: LAYOUT,
-  redirect: '/comp/basic',
+  redirect: '/comp/cardList',
   meta: {
     orderNo: 30,
     icon: 'ion:layers-outline',

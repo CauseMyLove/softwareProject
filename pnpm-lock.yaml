@@ -80,7 +80,7 @@ specifiers:
   qs: ^6.10.3
   resize-observer-polyfill: ^1.5.1
   rimraf: ^3.0.2
-  rollup: ^2.70.2
+  rollup: ^2.56.3
   rollup-plugin-visualizer: ^5.6.0
   showdown: ^2.1.0
   sortablejs: ^1.15.0
@@ -203,7 +203,7 @@ devDependencies:
   postcss-less: 6.0.0_postcss@8.4.12
   prettier: 2.6.2
   rimraf: 3.0.2
-  rollup: 2.70.2
+  rollup: registry.npmmirror.com/rollup/2.70.2
   rollup-plugin-visualizer: 5.6.0_rollup@2.70.2
   stylelint: 14.7.1
   stylelint-config-prettier: 9.0.3_stylelint@14.7.1
@@ -1923,7 +1923,7 @@ packages:
       '@babel/core': 7.17.9
       '@babel/helper-module-imports': 7.16.7
       '@rollup/pluginutils': 3.1.0_rollup@2.70.2
-      rollup: 2.70.2
+      rollup: registry.npmmirror.com/rollup/2.70.2
     dev: true
 
   /@rollup/plugin-node-resolve/11.2.1_rollup@2.70.2:
@@ -1938,7 +1938,7 @@ packages:
       deepmerge: 4.2.2
       is-module: 1.0.0
       resolve: 1.22.0
-      rollup: 2.70.2
+      rollup: registry.npmmirror.com/rollup/2.70.2
     dev: true
 
   /@rollup/plugin-node-resolve/13.2.1_rollup@2.70.2:
@@ -1953,7 +1953,7 @@ packages:
       deepmerge: 4.2.2
       is-module: 1.0.0
       resolve: 1.22.0
-      rollup: 2.70.2
+      rollup: registry.npmmirror.com/rollup/2.70.2
     dev: true
 
   /@rollup/plugin-replace/2.4.2_rollup@2.70.2:
@@ -1963,7 +1963,7 @@ packages:
     dependencies:
       '@rollup/pluginutils': 3.1.0_rollup@2.70.2
       magic-string: 0.25.9
-      rollup: 2.70.2
+      rollup: registry.npmmirror.com/rollup/2.70.2
     dev: true
 
   /@rollup/pluginutils/3.1.0_rollup@2.70.2:
@@ -1975,7 +1975,7 @@ packages:
       '@types/estree': 0.0.39
       estree-walker: 1.0.1
       picomatch: 2.3.1
-      rollup: 2.70.2
+      rollup: registry.npmmirror.com/rollup/2.70.2
     dev: true
 
   /@rollup/pluginutils/4.2.1:
@@ -3447,7 +3447,7 @@ packages:
       json-stringify-safe: 5.0.1
       lodash: 4.17.21
       meow: 8.1.2
-      semver: 6.3.0
+      semver: registry.npmmirror.com/semver/6.3.0
       split: 1.0.1
       through2: 4.0.2
     dev: true
@@ -4778,13 +4778,13 @@ packages:
     hasBin: true
     dependencies:
       meow: 8.1.2
-      semver: 6.3.0
+      semver: registry.npmmirror.com/semver/6.3.0
     dev: true
 
   /gitconfiglocal/1.0.0:
     resolution: {integrity: sha1-QdBF84UaXqiPA/JMocYXgRRGS5s=}
     dependencies:
-      ini: 1.3.8
+      ini: registry.npmmirror.com/ini/1.3.8
     dev: true
 
   /glob-parent/5.1.2:
@@ -6340,7 +6340,7 @@ packages:
     resolution: {integrity: sha1-NakjLfo11wZ7TLLd8jV7GHFTbF8=}
     engines: {node: '>=4'}
     dependencies:
-      path-key: 2.0.1
+      path-key: registry.npmmirror.com/path-key/2.0.1
     dev: true
 
   /npm-run-path/4.0.1:
@@ -7257,7 +7257,7 @@ packages:
     dependencies:
       '@babel/code-frame': 7.16.7
       jest-worker: 26.6.2
-      rollup: 2.70.2
+      rollup: registry.npmmirror.com/rollup/2.70.2
       serialize-javascript: 4.0.0
       terser: 5.12.1
     dev: true
@@ -7271,17 +7271,9 @@ packages:
     dependencies:
       nanoid: 3.3.3
       open: 8.4.0
-      rollup: 2.70.2
+      rollup: registry.npmmirror.com/rollup/2.70.2
       source-map: 0.7.3
       yargs: 17.4.1
-    dev: true
-
-  /rollup/2.70.2:
-    resolution: {integrity: sha512-EitogNZnfku65I1DD5Mxe8JYRUCy0hkK5X84IlDtUs+O6JRMpRciXTzyCUuX11b5L5pvjH+OmFXiQ3XjabcXgg==}
-    engines: {node: '>=10.0.0'}
-    hasBin: true
-    optionalDependencies:
-      fsevents: registry.npmmirror.com/fsevents/2.3.2
     dev: true
 
   /run-async/2.4.1:
@@ -8514,7 +8506,7 @@ packages:
       debug: 4.3.4
       fast-glob: 3.2.11
       pretty-bytes: 5.6.0
-      rollup: 2.70.2
+      rollup: registry.npmmirror.com/rollup/2.70.2
       vite: 2.9.5_less@4.1.2
       workbox-build: 6.5.3
       workbox-window: 6.5.3
@@ -8618,7 +8610,7 @@ packages:
       less: 4.1.2
       postcss: 8.4.12
       resolve: 1.22.0
-      rollup: 2.70.2
+      rollup: registry.npmmirror.com/rollup/2.70.2
     optionalDependencies:
       fsevents: registry.npmmirror.com/fsevents/2.3.2
     dev: true
@@ -8837,7 +8829,7 @@ packages:
       glob: 7.2.0
       lodash: 4.17.21
       pretty-bytes: 5.6.0
-      rollup: 2.70.2
+      rollup: registry.npmmirror.com/rollup/2.70.2
       rollup-plugin-terser: 7.0.2_rollup@2.70.2
       source-map: 0.8.0-beta.0
       stringify-object: 3.3.0
@@ -10652,6 +10644,16 @@ packages:
     version: 1.0.2
     dependencies:
       lowercase-keys: registry.npmmirror.com/lowercase-keys/1.0.1
+    dev: true
+
+  registry.npmmirror.com/rollup/2.70.2:
+    resolution: {integrity: sha512-EitogNZnfku65I1DD5Mxe8JYRUCy0hkK5X84IlDtUs+O6JRMpRciXTzyCUuX11b5L5pvjH+OmFXiQ3XjabcXgg==, registry: http://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/rollup/-/rollup-2.70.2.tgz}
+    name: rollup
+    version: 2.70.2
+    engines: {node: '>=10.0.0'}
+    hasBin: true
+    optionalDependencies:
+      fsevents: registry.npmmirror.com/fsevents/2.3.2
     dev: true
 
   registry.npmmirror.com/safe-buffer/5.1.2:

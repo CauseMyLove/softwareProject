@@ -29,7 +29,7 @@
   import { Button } from '/@/components/Button';
   import { PageWrapper } from '/@/components/Page';
   import { InputSearch } from 'ant-design-vue';
-  import { demoListApi, GET_ALL_LIST } from '/@/api/demo/table';
+  import { demoListApi, GET_ALL_LIST, GET_COMMENT } from '/@/api/demo/table';
   import { useMessage } from '/@/hooks/web/useMessage';
   import { useUserStore } from '/@/store/modules/user';
   import drawer from './drawer.vue';
@@ -69,7 +69,11 @@
   }
   async function handleDrawer(e) {
     console.log(e);
-    openDrawer2(true);
+    const data = await GET_COMMENT({ page: '1', size: '3', userid: '4' });
+    console.log(data);
+    openDrawer2(true, {
+      data: data,
+    });
   }
   async function handleDetail(e) {
     console.log(e);

@@ -9,12 +9,20 @@ enum Api {
   GOODS_LIST_page = '/product/page',
   GOODS_LIST_get = '/product/get/',
   GET_ALL_LIST = '/query/product',
+  GET_COMMENT = '/remark/page',
 }
 
 /**
  * @description: Get sample list value
  */
-
+export const GET_COMMENT = (params: DemoParams) =>
+  defHttp.post<DemoListGetResultModel>(
+    {
+      url: Api.GET_COMMENT,
+      params,
+    },
+    { isReturnNativeResponse: true },
+  );
 export const demoListApi = (params: DemoParams) =>
   defHttp.get<DemoListGetResultModel>({
     url: Api.DEMO_LIST,

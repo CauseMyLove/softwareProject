@@ -5,12 +5,18 @@
   </BasicDrawer>
 </template>
 <script lang="ts">
-  import { defineComponent } from 'vue';
+  import { defineComponent, ref } from 'vue';
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
+  import { GET_COMMENT } from '/@/api/demo/table';
   export default defineComponent({
     components: { BasicDrawer },
     setup() {
-      const [register, { closeDrawer }] = useDrawerInner();
+      const data = ref();
+      const [register, { closeDrawer }] = useDrawerInner(async (id) => {
+        console.log(16, id);
+        data.value = await GET_COMMENT({ page: '1', size: '3', userid: '4' });
+        console.log(data.value);
+      });
       return { register, closeDrawer };
     },
   });
